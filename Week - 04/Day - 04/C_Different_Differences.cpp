@@ -91,17 +91,38 @@ using namespace std;
 
 void solve()
 {
-    int n;
-    cin >> n;
+    int n, x;
+    cin >> n >> x;
 
+    vector<int> ans;
 
+    int cnt = 0;
 
-    
+    while (n)
+    {
+        if (x - cnt >= n)
+        {
+            ans.push_back(x - cnt);
+            x -= cnt;
+        }
+        else
+        {
+            ans.push_back(x - 1);
+            x--;
+        }
+        cnt++;
+        n--;
+    }
+    reverse(ans.begin(), ans.end());
+
+    for (auto i : ans)
+        cout << i << " ";
+    cout << endl;
 }
 
 int main()
 {
-         ios_base::sync_with_stdio(0);
+    ios_base::sync_with_stdio(0);
     cin.tie(0);
     int t;
     cin >> t;
