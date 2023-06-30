@@ -1,4 +1,5 @@
-#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 #define ll long long int;
 
@@ -10,7 +11,7 @@ void solve()
     vector<pair<int, int>> arr;
 
     int ok = h * 60 + m;
-    // cout << "OK" << ok << endl;
+
     int diff = INT_MAX;
 
     for (int i = 0; i < n; i++)
@@ -19,14 +20,13 @@ void solve()
         cin >> x >> y;
 
         int temp = x * 60 + y;
-        // cout << " TEMP " << temp << endl;
 
         int new_diff = temp - ok;
+
         if (new_diff < 0)
         {
             new_diff += 1440;
         }
-        // cout << "NEW diff" << new_diff << endl;
 
         diff = min(diff, new_diff);
     }
@@ -36,8 +36,8 @@ void solve()
 
 int main()
 {
-    // ios_base::sync_with_stdio(0);
-    // cin.tie(0);
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
     int t;
     cin >> t;
     while (t--)
