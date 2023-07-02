@@ -107,29 +107,29 @@ void solve()
 
     for (int i = 0; i < n; i++)
     {
-        temp += arr[i];
-        count++;
+        temp += arr[i]; // টেম্পোরারি সাম বেরকরার জন্য
+        count++;        // প্রতিটা সেগমেন্ট এর যটগুলা এলিমেন্ট আছে
 
-        int temp_max = 0;
+        int temp_max = 0; //
 
-        if (sum % temp == 0)
+        if (sum % temp == 0) // যদি  ডিভাইড হয় তাহলেই answer হতে পরে
         {
-            temp_max = count;
-            int temp_sum = 0, temp_count = 0;
+            temp_max = count;                 //
+            int temp_sum = 0, temp_count = 0; // অমরা এখন খুঁজবো আর কোথায় এমন সেগমেন্ট আছে যেখানে সেম যোগফল হয়
 
             for (int j = i + 1; j < n; j++)
             {
-                temp_sum += arr[j];
-                temp_count++;
+                temp_sum += arr[j]; // এইখানে সেকেন্ড সেগমেন্ট এর যোগফল রাখব
+                temp_count++;       // এইটার ও কাউন্ট রাখতেছি
 
-                if (temp_sum == temp)
+                if (temp_sum == temp) // যদি  উপরের কাউন্ট এর মতো এই কাউন্ট ও হয়
                 {
-                    temp_max = max(temp_max, temp_count);
-                    temp_sum = 0;
-                    temp_count = 0;
+                    temp_max = max(temp_max, temp_count); // অমরা কাউন্ট রাখতেছি যে  ম্যাক্সিমাম কত সংখ্য়া হতে পরে
+                    temp_sum = 0;                         // যদি মিলে যাই তাহলে আর আমাদের টেম্প রাখা লাগবে না
+                    temp_count = 0;                       // কাউন্ট ও জিরো করে দিব
                 }
             }
-            if (temp_sum == 0)
+            if (temp_sum == 0) // এন পর্য্যন্ত সবগুলা সিইক করার পর যদি দেখি সব ঠিক ঠাক  তাহলে অমরা মেইন্তা সেঞ্জ করবো
             {
                 mini = min(mini, temp_max);
             }
