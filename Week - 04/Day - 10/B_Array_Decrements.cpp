@@ -94,39 +94,61 @@ void solve()
     int n;
     cin >> n;
 
-    vector<int> arr(n);
+    vector<int> arr(n), brr(n);
+    set<int> set;
+
+    int max_zero = -1;
 
     for (int i = 0; i < n; i++)
     {
         cin >> arr[i];
     }
-
-    // if (n == 1)
-    // {
-    //     cout << 0 << endl;
-    //     return;
-    // }
-    int count = 0;
-    // if (arr[arr.size() - 1] < n)
-    // {
-    //     cout << -1 << endl;
-    //     return;
-    // }
-    for (int i = arr.size() - 2; i >= 0; i--)
+    for (int i = 0; i < n; i++)
     {
+        cin >> brr[i];
+    }
 
-        if (arr[i + 1] == 0)
+    bool possible = 1;
+
+    for (int i = 0; i < n; i++)
+    {
+        if (brr[i] == 0)
         {
-            cout << -1 << endl;
-            return;
+            max_zero = max(max_zero, arr[i]);
         }
-        while (arr[i] >= arr[i + 1])
+        else if (arr[i] < brr[i])
         {
-            arr[i] /= 2;
-            count++;
+            possible = 0;
+            break;
+        }
+        else
+        {
+            set.insert(arr[i] - brr[i]);
         }
     }
-    cout << count << endl;
+    if (set.size() == 0)
+    {
+    }
+    else if (set.size() == 1)
+    {
+        for (auto i : set)
+        {
+            if (i < max_zero)
+            {
+                possible = 0;
+                break;
+            }
+        }
+    }
+    else
+    {
+        possible = 0;
+    }
+
+    if (possible)
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
 }
 
 int main()

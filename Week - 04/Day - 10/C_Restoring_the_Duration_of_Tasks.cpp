@@ -95,38 +95,37 @@ void solve()
     cin >> n;
 
     vector<int> arr(n);
+    vector<int> brr(n);
+
+    vector<int> a(n);
 
     for (int i = 0; i < n; i++)
     {
         cin >> arr[i];
     }
-
-    // if (n == 1)
-    // {
-    //     cout << 0 << endl;
-    //     return;
-    // }
-    int count = 0;
-    // if (arr[arr.size() - 1] < n)
-    // {
-    //     cout << -1 << endl;
-    //     return;
-    // }
-    for (int i = arr.size() - 2; i >= 0; i--)
+    for (int i = 0; i < n; i++)
     {
-
-        if (arr[i + 1] == 0)
-        {
-            cout << -1 << endl;
-            return;
-        }
-        while (arr[i] >= arr[i + 1])
-        {
-            arr[i] /= 2;
-            count++;
-        }
+        cin >> brr[i];
     }
-    cout << count << endl;
+
+    int head = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        if (arr[i] >= head)
+        {
+            a[i] = brr[i] - arr[i];
+        }
+        else
+        {
+            a[i] = brr[i] - head;
+        }
+        head = brr[i];
+    }
+
+    for (auto i : a)
+        cout << i << " ";
+    cout << endl;
 }
 
 int main()
