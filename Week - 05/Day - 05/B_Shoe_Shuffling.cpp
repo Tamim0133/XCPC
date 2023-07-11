@@ -91,52 +91,46 @@ using ll = long long int;
 
 void solve()
 {
-    int n, k;
-    cin >> n >> k;
+    ll n;
+    cin >> n;
 
-    vector<pair<int, int>> arr(n);
+    vector<ll> arr(n + 5);
+    map<ll, int> map;
 
-    int maxi = 0;
-    for (int i = 0; i < n; i++)
+    for (int i = 1; i <= n; i++)
     {
-        cin >> arr[i].second;
-        maxi = max(maxi, arr[i].second);
+        cin >> arr[i];
+        map[arr[i]]++;
     }
 
-    for (int i = 0; i < n; i++)
+    for (auto i : map)
     {
-        cin >> arr[i].first;
-    }
-
-    sort(arr.begin(), arr.end());
-
-    int i = 0;
-
-    ll sum = 0;
-
-    while (i < n and k > 0)
-    {
-        sum += k;
-
-        while (i < n and arr[i].second - sum <= 0)
-            i++;
-        if (i == n)
+        if (i.second == 1)
         {
-            cout << "YES" << endl;
+            cout << -1 << endl;
             return;
         }
-
-        k -= arr[i].first;
     }
 
-    if (k > 0)
+    vector<ll> ans(n + 5);
+    for (int i = 1; i <= n; i++)
     {
-        cout << "YES" << endl;
+        ans[i] = i;
     }
-    else
+
+    for (int i = 1; i <= n; i++)
     {
-        cout << "NO" << endl;
+        if (arr[i] == arr[i + 1])
+        {
+            swap(ans[i], ans[i + 1]);
+        }
     }
+
+    for (int i = 1; i <= n; i++)
+    {
+        cout << ans[i] << " ";
+    }
+    cout << endl;
 }
 
 int main()

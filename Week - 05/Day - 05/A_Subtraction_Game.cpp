@@ -91,51 +91,22 @@ using ll = long long int;
 
 void solve()
 {
-    int n, k;
-    cin >> n >> k;
+    int a, b;
+    cin >> a >> b;
 
-    vector<pair<int, int>> arr(n);
-
-    int maxi = 0;
-    for (int i = 0; i < n; i++)
+    if (a > 1)
     {
-        cin >> arr[i].second;
-        maxi = max(maxi, arr[i].second);
+        cout << 1 << endl;
+        return;
     }
-
-    for (int i = 0; i < n; i++)
+    else if (a == 1 and b == 2)
     {
-        cin >> arr[i].first;
+        cout << 3 << endl;
     }
-
-    sort(arr.begin(), arr.end());
-
-    int i = 0;
-
-    ll sum = 0;
-
-    while (i < n and k > 0)
+    else if (a == 1)
     {
-        sum += k;
-
-        while (i < n and arr[i].second - sum <= 0)
-            i++;
-        if (i == n)
-        {
-            cout << "YES" << endl;
-            return;
-        }
-
-        k -= arr[i].first;
-    }
-
-    if (k > 0)
-    {
-        cout << "YES" << endl;
-    }
-    else
-    {
-        cout << "NO" << endl;
+        cout << 2 << endl;
+        return;
     }
 }
 

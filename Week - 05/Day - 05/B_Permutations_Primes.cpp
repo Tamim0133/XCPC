@@ -91,52 +91,62 @@ using ll = long long int;
 
 void solve()
 {
-    int n, k;
-    cin >> n >> k;
+    int n;
+    cin >> n;
 
-    vector<pair<int, int>> arr(n);
+    deque<int> ans;
 
-    int maxi = 0;
-    for (int i = 0; i < n; i++)
+    ans.push_front(1);
+    vector<bool> is_prime(n + 1, true);
+
+    is_prime[0] = is_prime[1] = false;
+
+    for (int i = 2; i <= n; i++)
     {
-        cin >> arr[i].second;
-        maxi = max(maxi, arr[i].second);
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        cin >> arr[i].first;
-    }
-
-    sort(arr.begin(), arr.end());
-
-    int i = 0;
-
-    ll sum = 0;
-
-    while (i < n and k > 0)
-    {
-        sum += k;
-
-        while (i < n and arr[i].second - sum <= 0)
-            i++;
-        if (i == n)
+        if (is_prime[i] && (long long)i * i <= n)
         {
-            cout << "YES" << endl;
-            return;
+            for (int j = i * i; j <= n; j += i)
+                is_prime[j] = false;
         }
-
-        k -= arr[i].first;
     }
-
-    if (k > 0)
+    bool ok = true;
+    for (int i = 2; i < is_prime.size(); i++)
     {
-        cout << "YES" << endl;
+        if (is_prime[i] == false)
+        {
+            if (ok)
+            {
+                ans.push_back(i);
+                ok = false;
+            }
+            else
+            {
+                ans.push_front(i);
+                ok = true;
+            }
+        }
     }
-    else
+    for (int i = 2; i < is_prime.size(); i++)
     {
-        cout << "NO" << endl;
+        if (is_prime[i] == true)
+        {
+            if (ok)
+            {
+                ans.push_back(i);
+                ok = false;
+            }
+            else
+            {
+                ans.push_front(i);
+                ok = true;
+            }
+        }
     }
+    for (auto i : ans)
+    {
+        cout << i << " ";
+    }
+    cout << endl;
 }
 
 int main()

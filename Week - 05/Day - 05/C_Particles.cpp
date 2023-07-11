@@ -22,10 +22,10 @@
 #if __cplusplus >= 201103L
 #include <ccomplex>
 #include <cfenv>
-#include <cinttypes>
+// #include <cll types>
 // #include <cstdalign>
 #include <cstdbool>
-#include <cstdint>
+// #include <cstdll >
 #include <ctgmath>
 #include <cwchar>
 #include <cwctype>
@@ -91,59 +91,95 @@ using ll = long long int;
 
 void solve()
 {
-    int n, k;
-    cin >> n >> k;
+    ll n;
+    cin >> n;
 
-    vector<pair<int, int>> arr(n);
+    deque<ll> ans;
 
-    int maxi = 0;
-    for (int i = 0; i < n; i++)
+    for (ll i = 0; i < n; i++)
     {
-        cin >> arr[i].second;
-        maxi = max(maxi, arr[i].second);
+        ll x;
+        cin >> x;
+        ans.push_back(x);
     }
 
-    for (int i = 0; i < n; i++)
+    while (ans.size() > 3)
     {
-        cin >> arr[i].first;
-    }
+        ll a = ans.front();
+        ans.pop_front();
 
-    sort(arr.begin(), arr.end());
+        ll b = ans.front();
+        ans.pop_front();
 
-    int i = 0;
+        ll c = ans.front();
+        ans.pop_front();
 
-    ll sum = 0;
+        ll mini = min(a, (min(b, c)));
 
-    while (i < n and k > 0)
-    {
-        sum += k;
-
-        while (i < n and arr[i].second - sum <= 0)
-            i++;
-        if (i == n)
+        if (b == mini or (a + c > a and a + c > c))
         {
-            cout << "YES" << endl;
-            return;
+            ans.push_front(a + c);
         }
-
-        k -= arr[i].first;
+        else if (a == mini)
+        {
+            ans.push_front(c);
+            ans.push_front(b);
+        }
+        else if (c == mini)
+        {
+            if (!ans.empty())
+            {
+                ll y = ans.front();
+                ans.pop_front();
+                ans.push_front(y + b);
+            }
+            else
+            {
+                ans.push_front(b);
+                ans.push_front(a);
+            }
+        }
     }
 
-    if (k > 0)
+    if (ans.size() == 1)
     {
-        cout << "YES" << endl;
+        cout << ans.front() << endl;
+        return;
+    }
+    else if (ans.size() == 2)
+    {
+        ll d = ans.front();
+        ans.pop_front();
+        ll e = ans.front();
+
+        cout << max(d, e) << endl;
+        return;
     }
     else
     {
-        cout << "NO" << endl;
+        ll a = ans.front();
+        ans.pop_front();
+
+        ll b = ans.front();
+        ans.pop_front();
+
+        ll c = ans.front();
+
+        cout << max(c, (max(a, (max(a + c, b))))) << endl;
     }
+    // while (!ans.empty())
+    // {
+    //     cout << ans.front() << " ";
+    //     ans.pop_front();
+    // }
+    // cout << endl;
 }
 
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    int t;
+    ll t;
     cin >> t;
     while (t--)
     {

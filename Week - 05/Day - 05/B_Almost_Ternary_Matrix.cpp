@@ -91,51 +91,41 @@ using ll = long long int;
 
 void solve()
 {
-    int n, k;
-    cin >> n >> k;
+    int n, m;
+    cin >> n >> m;
 
-    vector<pair<int, int>> arr(n);
+    int arr[n + 1][m + 1];
 
-    int maxi = 0;
-    for (int i = 0; i < n; i++)
+    for (int i = 1; i <= n; i++)
     {
-        cin >> arr[i].second;
-        maxi = max(maxi, arr[i].second);
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        cin >> arr[i].first;
-    }
-
-    sort(arr.begin(), arr.end());
-
-    int i = 0;
-
-    ll sum = 0;
-
-    while (i < n and k > 0)
-    {
-        sum += k;
-
-        while (i < n and arr[i].second - sum <= 0)
-            i++;
-        if (i == n)
+        for (int j = 1; j <= n; j++)
         {
-            cout << "YES" << endl;
-            return;
+            arr[i][j] = -1;
         }
-
-        k -= arr[i].first;
     }
 
-    if (k > 0)
+    arr[1][1] = 1;
+    arr[1][2] = 0;
+    arr[2][1] = 1;
+    arr[2][2] = 0;
+
+    vector<int> temp(4, 2);
+    for (int i = 1; i <= n; i++)
     {
-        cout << "YES" << endl;
-    }
-    else
-    {
-        cout << "NO" << endl;
+        for (int j = 1; j <= n; j++)
+        {
+            if (arr[i][j] == -1)
+            {
+                if (i > 1)
+                    temp.push_back(arr[i - 1][j]);
+                else if (j > 1)
+                    temp.push_back(arr[i][j - 1]);
+                else if (i < n)
+                    temp.push_back(arr[i + 1][j]);
+                else if (j < n)
+                    temp.push_back(arr[i][j + 1]);
+            }
+        }
     }
 }
 
