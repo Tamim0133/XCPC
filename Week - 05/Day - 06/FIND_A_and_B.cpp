@@ -91,37 +91,28 @@ using ll = long long int;
 
 void solve()
 {
-    ll n, m;
-    cin >> n >> m;
-    ll a[n][m];
-    for (ll i = 0; i < n; i += 2)
-    {
-        for (ll j = 0; j < m; j += 2)
-        {
-            if ((i + j) % 4 == 0)
-            {
-                a[i][j] = 0;
-                a[i + 1][j] = 1;
-                a[i][j + 1] = 1;
-                a[i + 1][j + 1] = 0;
-            }
-            else
-            {
-                a[i][j] = 1;
-                a[i + 1][j] = 0;
-                a[i][j + 1] = 0;
-                a[i + 1][j + 1] = 1;
-            }
-        }
-    }
+    ll a, b, c;
+    cin >> a >> b >> c;
 
-    for (ll i = 0; i < n; i++)
+    if ((a * b * 1LL) % c == 0)
     {
-        for (ll j = 0; j < m; j++)
-        {
-            cout << a[i][j] << " ";
-        }
-        cout << endl;
+        cout << a * b * 1LL << " " << c << endl;
+        return;
+    }
+    else if ((b * c * 1LL) % a == 0)
+    {
+        cout << c * b * 1LL << " " << a << endl;
+        return;
+    }
+    else if ((a * c * 1LL) % b == 0)
+    {
+        cout << a * c * 1LL << " " << b << endl;
+        return;
+    }
+    else
+    {
+        cout << -1 << endl;
+        return;
     }
 }
 

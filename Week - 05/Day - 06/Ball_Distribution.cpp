@@ -91,37 +91,38 @@ using ll = long long int;
 
 void solve()
 {
-    ll n, m;
-    cin >> n >> m;
-    ll a[n][m];
-    for (ll i = 0; i < n; i += 2)
+    int a, b;
+    cin >> a >> b;
+
+    vector<int> arr(b);
+
+    int sum = 0;
+    for (int i = 0; i < b; i++)
     {
-        for (ll j = 0; j < m; j += 2)
-        {
-            if ((i + j) % 4 == 0)
-            {
-                a[i][j] = 0;
-                a[i + 1][j] = 1;
-                a[i][j + 1] = 1;
-                a[i + 1][j + 1] = 0;
-            }
-            else
-            {
-                a[i][j] = 1;
-                a[i + 1][j] = 0;
-                a[i][j + 1] = 0;
-                a[i + 1][j + 1] = 1;
-            }
-        }
+        cin >> arr[i];
+        sum += arr[i];
     }
 
-    for (ll i = 0; i < n; i++)
+    int temp = 0;
+
+    for (int i = 0; i < b; i++)
     {
-        for (ll j = 0; j < m; j++)
-        {
-            cout << a[i][j] << " ";
-        }
-        cout << endl;
+        temp += (a - arr[i]);
+    }
+
+    cout << "Temp" << temp << endl;
+    if (sum <= a)
+    {
+        cout << 0 << endl;
+    }
+
+    else if (temp > a)
+    {
+        cout << a << endl;
+    }
+    else
+    {
+        cout << a - temp << endl;
     }
 }
 

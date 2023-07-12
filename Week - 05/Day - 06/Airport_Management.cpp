@@ -91,38 +91,20 @@ using ll = long long int;
 
 void solve()
 {
-    ll n, m;
-    cin >> n >> m;
-    ll a[n][m];
-    for (ll i = 0; i < n; i += 2)
-    {
-        for (ll j = 0; j < m; j += 2)
-        {
-            if ((i + j) % 4 == 0)
-            {
-                a[i][j] = 0;
-                a[i + 1][j] = 1;
-                a[i][j + 1] = 1;
-                a[i + 1][j + 1] = 0;
-            }
-            else
-            {
-                a[i][j] = 1;
-                a[i + 1][j] = 0;
-                a[i][j + 1] = 0;
-                a[i + 1][j + 1] = 1;
-            }
-        }
-    }
+    int n;
+    cin >> n;
 
-    for (ll i = 0; i < n; i++)
+    map<int, int> map;
+    int ans = 0;
+
+    for (int i = 0; i < 2 * n; i++)
     {
-        for (ll j = 0; j < m; j++)
-        {
-            cout << a[i][j] << " ";
-        }
-        cout << endl;
+        int x;
+        cin >> x;
+        map[x]++;
+        ans = max(ans, map[x]);
     }
+    cout << ans << endl;
 }
 
 int main()

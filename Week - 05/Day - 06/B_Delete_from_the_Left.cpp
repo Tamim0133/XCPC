@@ -91,49 +91,35 @@ using ll = long long int;
 
 void solve()
 {
-    ll n, m;
-    cin >> n >> m;
-    ll a[n][m];
-    for (ll i = 0; i < n; i += 2)
-    {
-        for (ll j = 0; j < m; j += 2)
-        {
-            if ((i + j) % 4 == 0)
-            {
-                a[i][j] = 0;
-                a[i + 1][j] = 1;
-                a[i][j + 1] = 1;
-                a[i + 1][j + 1] = 0;
-            }
-            else
-            {
-                a[i][j] = 1;
-                a[i + 1][j] = 0;
-                a[i][j + 1] = 0;
-                a[i + 1][j + 1] = 1;
-            }
-        }
-    }
-
-    for (ll i = 0; i < n; i++)
-    {
-        for (ll j = 0; j < m; j++)
-        {
-            cout << a[i][j] << " ";
-        }
-        cout << endl;
-    }
 }
 
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    int t;
-    cin >> t;
-    while (t--)
+
+    string s, t;
+
+    cin >> s >> t;
+    int count = 0;
+
+    reverse(s.begin(), s.end());
+    reverse(t.begin(), t.end());
+
+    while (s != t)
     {
-        solve();
+        if (s.size() > t.size())
+        {
+            s.pop_back();
+        }
+        else
+        {
+            t.pop_back();
+        }
+        count++;
     }
+
+    cout << count << endl;
+
     return 0;
 }
