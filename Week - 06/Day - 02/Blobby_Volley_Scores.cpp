@@ -91,36 +91,27 @@ using ll = long long int;
 
 void solve()
 {
-    int n, k, x;
-    cin >> n >> k >> x;
+    int n;
+    cin >> n;
 
-    priority_queue<int> pq;
-    while (n--)
+    string s;
+    cin >> s;
+
+    int a = 0, b = 0;
+
+    bool alice_serve = true;
+    for (auto i : s)
     {
-        int a, b;
-        cin >> a >> b;
-
-        if (b == x)
-            pq.push(a);
+        if (i == 'A' and alice_serve)
+            a++;
+        else if (i == 'A' and !alice_serve)
+            alice_serve = true;
+        else if (i == 'B' and alice_serve)
+            alice_serve = false;
+        else if (i == 'B' and !alice_serve)
+            b++;
     }
-
-    int ans = 0;
-
-    if (pq.empty())
-    {
-        cout << -1 << endl;
-        return;
-    }
-    while (k--)
-    {
-        if (pq.empty())
-        {
-            break;
-        }
-        ans += pq.top();
-        pq.pop();
-    }
-    cout << ans << endl;
+    cout << a << " " << b << endl;
 }
 
 int main()

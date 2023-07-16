@@ -91,36 +91,31 @@ using ll = long long int;
 
 void solve()
 {
-    int n, k, x;
-    cin >> n >> k >> x;
+    int n;
+    cin >> n;
 
-    priority_queue<int> pq;
-    while (n--)
+    vector<int> arr(n);
+
+    for (int i = 0; i < n; i++)
+        cin >> arr[i];
+
+    set<int> set;
+
+    for (int i = 0; i < n; i++)
     {
-        int a, b;
-        cin >> a >> b;
-
-        if (b == x)
-            pq.push(a);
+        if (i == 0)
+            set.insert(abs(arr[i] - arr[i + 1]));
+        else if (i == n - 1)
+            set.insert(abs(arr[i] - arr[i - 1]));
+        else
+            set.insert(max(abs(arr[i] - arr[i - 1]), abs(arr[i] - arr[i + 1])));
     }
 
-    int ans = 0;
-
-    if (pq.empty())
+    for (auto i : set)
     {
-        cout << -1 << endl;
+        cout << i << endl;
         return;
     }
-    while (k--)
-    {
-        if (pq.empty())
-        {
-            break;
-        }
-        ans += pq.top();
-        pq.pop();
-    }
-    cout << ans << endl;
 }
 
 int main()

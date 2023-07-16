@@ -91,36 +91,59 @@ using ll = long long int;
 
 void solve()
 {
-    int n, k, x;
-    cin >> n >> k >> x;
+    int n;
+    cin >> n;
 
-    priority_queue<int> pq;
-    while (n--)
+    string s;
+    cin >> s;
+
+    map<char, int> map;
+
+    for (auto i : s)
     {
-        int a, b;
-        cin >> a >> b;
-
-        if (b == x)
-            pq.push(a);
+        map[i]++;
     }
 
-    int ans = 0;
-
-    if (pq.empty())
+    bool palindrome = false;
+    if (s.size() % 2 == 0)
     {
-        cout << -1 << endl;
-        return;
-    }
-    while (k--)
-    {
-        if (pq.empty())
+        palindrome = true;
+        for (auto i : map)
         {
-            break;
+            if (i.second % 2 != 0)
+            {
+                palindrome = false;
+                break;
+            }
         }
-        ans += pq.top();
-        pq.pop();
     }
-    cout << ans << endl;
+    else
+    {
+        int odd = 0;
+        for (auto i : map)
+        {
+            if (i.second % 2 == 1)
+            {
+                odd++;
+            }
+        }
+        if (odd == 1)
+            palindrome = 1;
+    }
+
+    if (map.size() == 1)
+    {
+        if (s.size() % 2 == 0)
+            cout << 1 << endl;
+
+        else
+            cout << 2 << endl;
+    }
+
+    else if (palindrome)
+        cout << 1 << endl;
+    else if (!palindrome)
+        cout << 0 << endl;
 }
 
 int main()

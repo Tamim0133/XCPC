@@ -91,36 +91,17 @@ using ll = long long int;
 
 void solve()
 {
-    int n, k, x;
-    cin >> n >> k >> x;
+    int n;
+    cin >> n;
 
-    priority_queue<int> pq;
-    while (n--)
-    {
-        int a, b;
-        cin >> a >> b;
-
-        if (b == x)
-            pq.push(a);
-    }
-
-    int ans = 0;
-
-    if (pq.empty())
-    {
+    if (n & 1)
         cout << -1 << endl;
-        return;
-    }
-    while (k--)
+    else
     {
-        if (pq.empty())
-        {
-            break;
-        }
-        ans += pq.top();
-        pq.pop();
+        for (int i = n; i >= 1; i--)
+            cout << i << " ";
+        cout << endl;
     }
-    cout << ans << endl;
 }
 
 int main()

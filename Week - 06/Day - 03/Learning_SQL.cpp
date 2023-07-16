@@ -89,49 +89,13 @@
 using namespace std;
 using ll = long long int;
 
-void solve()
-{
-    int n, k, x;
-    cin >> n >> k >> x;
-
-    priority_queue<int> pq;
-    while (n--)
-    {
-        int a, b;
-        cin >> a >> b;
-
-        if (b == x)
-            pq.push(a);
-    }
-
-    int ans = 0;
-
-    if (pq.empty())
-    {
-        cout << -1 << endl;
-        return;
-    }
-    while (k--)
-    {
-        if (pq.empty())
-        {
-            break;
-        }
-        ans += pq.top();
-        pq.pop();
-    }
-    cout << ans << endl;
-}
-
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    int t;
-    cin >> t;
-    while (t--)
-    {
-        solve();
-    }
+
+    int a, b, c;
+    cin >> a >> b >> c;
+    cout << (a + c) * b << endl;
     return 0;
 }

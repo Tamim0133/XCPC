@@ -91,35 +91,19 @@ using ll = long long int;
 
 void solve()
 {
-    int n, k, x;
-    cin >> n >> k >> x;
+    int n, k;
+    ll m = 1e9 + 7;
+    cin >> n >> k;
 
-    priority_queue<int> pq;
+    ll ans = 1;
     while (n--)
     {
-        int a, b;
-        cin >> a >> b;
-
-        if (b == x)
-            pq.push(a);
-    }
-
-    int ans = 0;
-
-    if (pq.empty())
-    {
-        cout << -1 << endl;
-        return;
-    }
-    while (k--)
-    {
-        if (pq.empty())
-        {
+        ans = (ans * k) % m;
+        k--;
+        if (k == 0)
             break;
-        }
-        ans += pq.top();
-        pq.pop();
     }
+
     cout << ans << endl;
 }
 

@@ -91,36 +91,19 @@ using ll = long long int;
 
 void solve()
 {
-    int n, k, x;
-    cin >> n >> k >> x;
+    int n;
+    cin >> n;
 
-    priority_queue<int> pq;
-    while (n--)
+    if (n <= 10)
     {
-        int a, b;
-        cin >> a >> b;
-
-        if (b == x)
-            pq.push(a);
+        cout << "Lower Double" << endl;
     }
-
-    int ans = 0;
-
-    if (pq.empty())
-    {
-        cout << -1 << endl;
-        return;
-    }
-    while (k--)
-    {
-        if (pq.empty())
-        {
-            break;
-        }
-        ans += pq.top();
-        pq.pop();
-    }
-    cout << ans << endl;
+    else if (n <= 15)
+        cout << "Lower Single" << endl;
+    else if (n <= 25)
+        cout << "Upper Double" << endl;
+    else
+        cout << "Upper Single" << endl;
 }
 
 int main()
