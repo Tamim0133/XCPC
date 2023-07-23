@@ -91,22 +91,17 @@ using ll = long long int;
 
 void solve()
 {
-    int n;
-    cin >> n;
+    vector<int> arr(3);
 
-    int temp = n;
+    for (int i = 0; i < 3; i++)
+        cin >> arr[i];
 
-    int rem = temp % 10;
-    if (n < 10)
-    {
-        rem = temp;
-    }
-    // cout << "rem" << rem << endl;
-    if (rem < 5)
-        n -= rem;
+    sort(arr.rbegin(), arr.rend());
+
+    if (arr[0] + arr[1] >= 10)
+        cout << "YES" << endl;
     else
-        n += (10 - rem);
-    cout << 100 - n << endl;
+        cout << "NO" << endl;
 }
 
 int main()

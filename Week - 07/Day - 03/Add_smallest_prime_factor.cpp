@@ -89,24 +89,42 @@
 using namespace std;
 using ll = long long int;
 
+int smallest_factor(int x)
+{
+    for (int i = 3; i <= x; i++)
+    {
+        if (x % i == 0)
+        {
+            return i;
+        }
+    }
+    return 1;
+}
+
 void solve()
 {
-    int n;
-    cin >> n;
+    ll x, y;
+    cin >> x >> y;
 
-    int temp = n;
-
-    int rem = temp % 10;
-    if (n < 10)
+    if (x == y)
     {
-        rem = temp;
+        cout << 0 << endl;
+        return;
     }
-    // cout << "rem" << rem << endl;
-    if (rem < 5)
-        n -= rem;
+
+    if (y % 2 == 1)
+        y++;
+    if (x % 2 == 0)
+    {
+        cout << (y - x) / 2 << endl;
+        return;
+    }
     else
-        n += (10 - rem);
-    cout << 100 - n << endl;
+    {
+        int factor = smallest_factor(x);
+        // cout << "FACTOR" << factor << endl;
+        cout << (y - (x + factor)) / 2 + 1 << endl;
+    }
 }
 
 int main()

@@ -91,22 +91,22 @@ using ll = long long int;
 
 void solve()
 {
-    int n;
-    cin >> n;
+    char arr[8][8];
+    vector<char> ans;
 
-    int temp = n;
-
-    int rem = temp % 10;
-    if (n < 10)
+    for (int i = 0; i < 8; i++)
     {
-        rem = temp;
+        for (int j = 0; j < 8; j++)
+        {
+            cin >> arr[i][j];
+            if (arr[i][j] != '.')
+                ans.push_back(arr[i][j]);
+        }
     }
-    // cout << "rem" << rem << endl;
-    if (rem < 5)
-        n -= rem;
-    else
-        n += (10 - rem);
-    cout << 100 - n << endl;
+
+    for (auto i : ans)
+        cout << i;
+    cout << endl;
 }
 
 int main()

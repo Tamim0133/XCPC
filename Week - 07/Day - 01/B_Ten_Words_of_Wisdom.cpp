@@ -94,19 +94,31 @@ void solve()
     int n;
     cin >> n;
 
-    int temp = n;
-
-    int rem = temp % 10;
-    if (n < 10)
+    int maxi = 0, i = 1;
+    int ans = 0;
+    while (n--)
     {
-        rem = temp;
+        int a, b;
+
+        cin >> a >> b;
+
+        if (a > 10)
+        {
+        }
+        else
+        {
+            int temp = maxi;
+            maxi = max(maxi, b);
+
+            if (temp != maxi)
+            {
+                ans = i;
+            }
+        }
+        i++;
+        // cout << i - 1 << " " << maxi << endl;
     }
-    // cout << "rem" << rem << endl;
-    if (rem < 5)
-        n -= rem;
-    else
-        n += (10 - rem);
-    cout << 100 - n << endl;
+    cout << ans << endl;
 }
 
 int main()

@@ -94,19 +94,17 @@ void solve()
     int n;
     cin >> n;
 
-    int temp = n;
+    deque<int> dq;
 
-    int rem = temp % 10;
-    if (n < 10)
+    for (int i = 1; i <= n; i += 2)
     {
-        rem = temp;
+        dq.push_back(i);
+        dq.push_front(i + 1);
     }
-    // cout << "rem" << rem << endl;
-    if (rem < 5)
-        n -= rem;
-    else
-        n += (10 - rem);
-    cout << 100 - n << endl;
+
+    for (auto i : dq)
+        cout << i << " ";
+    cout << endl;
 }
 
 int main()

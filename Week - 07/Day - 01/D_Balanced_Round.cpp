@@ -91,22 +91,36 @@ using ll = long long int;
 
 void solve()
 {
-    int n;
-    cin >> n;
+    int n, k;
+    cin >> n >> k;
 
-    int temp = n;
+    vector<int> arr(n);
+    int maxi = 0;
+    for (int i = 0; i < n; i++)
+        cin >> arr[i];
 
-    int rem = temp % 10;
-    if (n < 10)
+    int count = 1;
+    sort(arr.begin(), arr.end());
+
+    if (n == 1)
     {
-        rem = temp;
+        cout << 0 << endl;
+        return;
     }
-    // cout << "rem" << rem << endl;
-    if (rem < 5)
-        n -= rem;
-    else
-        n += (10 - rem);
-    cout << 100 - n << endl;
+
+    for (int i = 0; i < n - 1; i++)
+    {
+        if (arr[i + 1] - arr[i] <= k)
+        {
+            count++;
+        }
+        else
+        {
+            count = 1;
+        }
+        maxi = max(count, maxi);
+    }
+    cout << n - maxi << endl;
 }
 
 int main()

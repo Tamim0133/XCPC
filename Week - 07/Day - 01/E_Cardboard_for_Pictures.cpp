@@ -91,22 +91,41 @@ using ll = long long int;
 
 void solve()
 {
-    int n;
-    cin >> n;
+    ll n, k;
+    cin >> n >> k;
 
-    int temp = n;
+    vector<ll> arr(n);
 
-    int rem = temp % 10;
-    if (n < 10)
+    for (int i = 0; i < n; i++)
+        cin >> arr[i];
+
+    ll sum = 0, sum_sq = 0;
+
+    for (auto i : arr)
     {
-        rem = temp;
+        sum += i;
+        sum_sq += pow(i, 2);
     }
-    // cout << "rem" << rem << endl;
-    if (rem < 5)
-        n -= rem;
+
+    ll a = 4 * n;
+    ll b = 4 * sum;
+    ll c = sum_sq - k;
+
+    ll d = ((b * b) - (4 * a * c));
+    cout << "a " << a << " b " << b << " c " << c << " d " << sqrt(d) << endl;
+    ll root1, root2;
+
+    if (d == 0)
+    {
+        cout << ((b * -1) / (2 * a)) << endl;
+    }
     else
-        n += (10 - rem);
-    cout << 100 - n << endl;
+    {
+        root1 = (-b + sqrt(d) * 1LL) * 1LL / (2 * a * 1LL);
+        root2 = (-b - sqrt(d) * 1LL) * 1LL / (2 * a * 1LL);
+
+        cout << "Root1 " << root1 << " Root2 " << root2 << endl;
+    }
 }
 
 int main()

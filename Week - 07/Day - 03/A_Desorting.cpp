@@ -93,20 +93,27 @@ void solve()
 {
     int n;
     cin >> n;
+    vector<int> arr(n);
 
-    int temp = n;
+    for (int i = 0; i < n; i++)
+        cin >> arr[i];
 
-    int rem = temp % 10;
-    if (n < 10)
+    int mini = INT_MAX;
+
+    for (int i = 1; i < n; i++)
     {
-        rem = temp;
+        if (arr[i - 1] > arr[i])
+        {
+            cout << 0 << endl;
+            return;
+        }
+        else
+        {
+            mini = min(mini, arr[i] - arr[i - 1]);
+        }
     }
-    // cout << "rem" << rem << endl;
-    if (rem < 5)
-        n -= rem;
-    else
-        n += (10 - rem);
-    cout << 100 - n << endl;
+
+    cout << mini / 2 + 1 << endl;
 }
 
 int main()
