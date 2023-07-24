@@ -94,17 +94,17 @@ void solve()
     ll n, m;
     cin >> n >> m;
 
+    ll x = n / m;
     ll sum = 0;
-    if (n == 1 and m == 1)
-    {
-        cout << 1 << endl;
-        return;
-    }
 
-    for (ll i = m; i <= n; i += m)
-    {
-        sum += (i % 10);
-    }
+    for (int i = 0; i < 10; i++)
+        sum += ((i + 1) * m) % 10;
+
+    sum *= x / 10;
+
+    for (int i = 0; i < x % 10; i++)
+        sum += ((i + 1) * m) % 10;
+
     cout << sum << endl;
 }
 
