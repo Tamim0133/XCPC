@@ -91,28 +91,14 @@ using ll = long long int;
 
 void solve()
 {
-    ll n;
-    cin >> n;
-    int cnt = 0, p = 1, ans;
-    for (int i = 1; i <= (ll)sqrt(n); i++)
-    {
-        if (n % i == 0)
-        {
-            cnt++;
-        }
-        else
-        {
-            if (cnt >= p)
-            {
-                ans = cnt;
-            }
-            p = cnt;
-            cnt = 0;
-        }
+    int b, c, h;
 
-        cout << "i " << i << " cnt " << cnt << " ans " << ans << endl;
-    }
-    cout << ans << endl;
+    cin >> b >> c >> h;
+
+    if (b >= c + h + 1)
+        cout << c + h + c + h + 1 << endl;
+    else
+        cout << b + b - 1 << endl;
 }
 
 int main()

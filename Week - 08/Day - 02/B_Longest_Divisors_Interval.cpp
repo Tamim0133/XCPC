@@ -93,26 +93,18 @@ void solve()
 {
     ll n;
     cin >> n;
-    int cnt = 0, p = 1, ans;
-    for (int i = 1; i <= (ll)sqrt(n); i++)
-    {
-        if (n % i == 0)
-        {
-            cnt++;
-        }
-        else
-        {
-            if (cnt >= p)
-            {
-                ans = cnt;
-            }
-            p = cnt;
-            cnt = 0;
-        }
 
-        cout << "i " << i << " cnt " << cnt << " ans " << ans << endl;
+    ll ans = 0;
+    ll cnt = 0;
+
+    for (ll i = 1; i < 2000; i++)
+    {
+        if (n % i != 0)
+        {
+            cout << i - 1 << endl;
+            break;
+        }
     }
-    cout << ans << endl;
 }
 
 int main()

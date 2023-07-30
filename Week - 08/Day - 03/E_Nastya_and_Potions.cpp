@@ -89,30 +89,81 @@
 using namespace std;
 using ll = long long int;
 
+const int N = (int)1e6 + 5;
+vector<int> adj[N];
+vector<ll> cost;
+vector<bool> visited;
+
+ll INF = 1e16 + 5;
+
+void DFS(int curr)
+{
+    ll res = 0;
+    visited[curr] = true;
+    bool has_child = false;
+
+    for (auto i : adj[curr])
+    {
+        has_child = true;
+        if (!visited[i])
+            DFS(i);
+        res += cost[i];
+    }
+    if (!has_child)
+    {
+        res = INF;
+    }
+    cost[curr] = min(cost[curr], res);
+}
+
 void solve()
 {
-    ll n;
-    cin >> n;
-    int cnt = 0, p = 1, ans;
-    for (int i = 1; i <= (ll)sqrt(n); i++)
-    {
-        if (n % i == 0)
-        {
-            cnt++;
-        }
-        else
-        {
-            if (cnt >= p)
-            {
-                ans = cnt;
-            }
-            p = cnt;
-            cnt = 0;
-        }
+    int n, k;
+    cin >> n >> k;
 
-        cout << "i " << i << " cnt " << cnt << " ans " << ans << endl;
+    cost.assign(n + 2, false);
+    visited.assign(n + 2, false);
+
+    for (int i = 0; i <= n; i++)
+    {
+        adj[i].clear();
     }
-    cout << ans << endl;
+
+    for (int i = 1; i <= n; i++)
+        cin >> cost[i];
+
+    for (int i = 1; i <= k; i++)
+    {
+        int p;
+        cin >> p;
+        cost[p] = 0;
+    }
+
+    for (int i = 1; i <= n; i++)
+    {
+        int req;
+        cin >> req;
+        for (int j = 1; j <= req; j++)
+        {
+            int x;
+            cin >> x;
+            adj[i].push_back(x);
+        }
+    }
+
+    for (int i = 1; i <= n; i++)
+    {
+        if (!visited[i])
+        {
+            DFS(i);
+        }
+    }
+
+    for (int i = 1; i <= n; i++)
+    {
+        cout << cost[i] << " ";
+    }
+    cout << endl;
 }
 
 int main()

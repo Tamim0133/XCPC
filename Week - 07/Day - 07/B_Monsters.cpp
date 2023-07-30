@@ -91,28 +91,62 @@ using ll = long long int;
 
 void solve()
 {
-    ll n;
-    cin >> n;
-    int cnt = 0, p = 1, ans;
-    for (int i = 1; i <= (ll)sqrt(n); i++)
-    {
-        if (n % i == 0)
-        {
-            cnt++;
-        }
-        else
-        {
-            if (cnt >= p)
-            {
-                ans = cnt;
-            }
-            p = cnt;
-            cnt = 0;
-        }
+    int n, k;
+    cin >> n >> k;
 
-        cout << "i " << i << " cnt " << cnt << " ans " << ans << endl;
+    vector<pair<int, int>> arr;
+    vector<pair<int, int>> brr;
+
+    priority_queue<pair<int, int>> pq;
+
+    for (int i = 0; i < n; i++)
+    {
+        int x;
+        cin >> x;
+
+        int a = x % k;
+        // cout << a << " ";
+        if (a == 0)
+            arr.push_back({a, (i + 1)});
+        else
+            brr.push_back({a, -(i + 1)});
     }
-    cout << ans << endl;
+
+    sort(arr.rbegin(), arr.rend());
+    sort(brr.rbegin(), brr.rend());
+    // reverse(arr.begin(), arr.end());
+
+    for (int i = arr.size() - 1; i >= 0; i--)
+        // cout << arr[i].first << " " << arr[i].second << endl;
+        cout << arr[i].second << " ";
+
+    // cout << endl;
+    if (brr.empty())
+        return;
+
+    // set<int> set;
+    // for (int i = 0; i < brr.size(); i++)
+    // {
+    //     set.insert(brr[i].first);
+    // }
+    // if (set.size() == 1)
+    // {
+    //     cout << "Fir"
+    //          << " ";
+    //     for (int i = brr.size() - 1; i >= 0; i--)
+    //         // cout << arr[i].first << " " << arr[i].second << endl;
+    //         // cout << brr[i].second << " ";
+    //         cout << brr[i].first << " : " << brr[i].second << " ";
+    // }
+    // else
+    {
+        // for (int i = brr.size() - 1; i >= 0; i--)
+        for (int i = 0; i < brr.size(); i++)
+            // cout << arr[i].first << " " << arr[i].second << endl;
+            cout << -brr[i].second << " ";
+        // cout << brr[i].first << " : " << brr[i].second << " ";
+    }
+    cout << endl;
 }
 
 int main()

@@ -89,30 +89,33 @@
 using namespace std;
 using ll = long long int;
 
-void solve()
+int solve()
 {
-    ll n;
+    int n;
     cin >> n;
-    int cnt = 0, p = 1, ans;
-    for (int i = 1; i <= (ll)sqrt(n); i++)
-    {
-        if (n % i == 0)
-        {
-            cnt++;
-        }
-        else
-        {
-            if (cnt >= p)
-            {
-                ans = cnt;
-            }
-            p = cnt;
-            cnt = 0;
-        }
 
-        cout << "i " << i << " cnt " << cnt << " ans " << ans << endl;
+    vector<int> arr(n);
+
+    for (int i = 0; i < n; i++)
+        cin >> arr[i];
+
+    sort(arr.begin(), arr.end());
+
+    if (n == 1)
+        return arr[0];
+
+    int a = arr[n - 1];
+    int ans = 0;
+
+    for (int i = n - 2; i >= 0; i--)
+    {
+        ans += min(a, arr[i]);
+        a = abs(a - arr[i]);
+    
     }
-    cout << ans << endl;
+    if (a)
+        ans += a;
+    return ans;
 }
 
 int main()
@@ -123,7 +126,7 @@ int main()
     cin >> t;
     while (t--)
     {
-        solve();
+        cout << solve() << endl;
     }
     return 0;
 }

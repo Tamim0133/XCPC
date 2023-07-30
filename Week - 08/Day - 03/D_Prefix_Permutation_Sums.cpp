@@ -93,28 +93,111 @@ void solve()
 {
     ll n;
     cin >> n;
-    int cnt = 0, p = 1, ans;
-    for (int i = 1; i <= (ll)sqrt(n); i++)
+
+    vector<ll> a(n);
+
+    for (int i = 0; i <= n - 2; i++)
+        cin >> a[i];
+
+    ll total = n * (n + 1LL) / 2LL;
+
+    if (a[n - 2] > total)
     {
-        if (n % i == 0)
+        cout << "NO" << endl;
+        return;
+    }
+
+    if (a[n - 2] != total)
+    {
+        a[n - 1] = total;
+
+        vector<ll> arr;
+
+        for (int i = n - 2; i >= 0; i--)
         {
-            cnt++;
+            arr.push_back(a[i + 1] - a[i]);
+        }
+
+        arr.push_back(a[0]);
+
+        bool ok = true;
+        vector<bool> visited(n + 1, false);
+        for (int i = 0; i < n; i++)
+        {
+            if (arr[i] > n or visited[arr[i]])
+            {
+                ok = false;
+                break;
+            }
+            visited[arr[i]] = true;
+        }
+
+        if (ok)
+            cout << "YES" << endl;
+        else
+            cout << "NO" << endl;
+
+        return;
+    }
+
+    vector<bool> visited(n + 1, false);
+    vector<ll> sums;
+
+    for (int i = 0; i <= n - 2; i++)
+    {
+        if (i == 0)
+        {
+            sums.push_back(a[i]);
+            if (a[i] <= n)
+            {
+                visited[a[i]] = true;
+            }
         }
         else
         {
-            if (cnt >= p)
+            sums.push_back(a[i] - a[i - 1]);
+            if (a[i] - a[i - 1] <= n)
             {
-                ans = cnt;
+                visited[a[i] - a[i - 1]] = true;
             }
-            p = cnt;
-            cnt = 0;
         }
-
-        cout << "i " << i << " cnt " << cnt << " ans " << ans << endl;
     }
-    cout << ans << endl;
-}
 
+    vector<ll> missing;
+    for (int i = 1; i <= n; i++)
+    {
+        if (!visited[i])
+        {
+            missing.push_back(i);
+        }
+    }
+
+    if (missing.size() != 2)
+    {
+        cout << "NO" << endl;
+        return;
+    }
+
+    bool ok = false;
+
+    for (auto i : sums)
+    {
+        if (missing[0] + missing[1] == i)
+        {
+            ok = true;
+            break;
+        }
+    }
+
+    if (ok)
+    {
+        cout << "YES" << endl;
+    }
+    else
+    {
+        cout << "NO" << endl;
+    }
+}
 int main()
 {
     ios_base::sync_with_stdio(0);
