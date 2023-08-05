@@ -91,78 +91,77 @@ using ll = long long int;
 
 void solve()
 {
-    int pos = 0;
-    int neg = 0;
+    ll n, q;
+    cin >> n >> q;
 
-    int n;
-    cin >> n;
-
-    int arr[n + 1];
-    int maxi = INT_MIN;
-    int max_i = 0;
+    vector<ll> arr(n + 1), new_arr(n + 1), freq(n + 1, 0), diff(n + 2, 0), pre_sum(n + 1, 0);
+    vector<pair<ll, ll>> query, freq_pair;
 
     for (int i = 1; i <= n; i++)
-    {
         cin >> arr[i];
 
-        pos += arr[i] > 0;
-        neg += arr[i] <= 0;
+    sort(arr.rbegin(), arr.rend());
 
-        if (arr[i] > maxi)
-        {
-            maxi = arr[i];
-            max_i = i;
-        }
-    }
-
-    if (pos == n)
+    for (int i = 1; i <= q; i++)
     {
-        cout << n - 1 << endl;
+        int a, b;
+        cin >> a >> b;
 
-        for (int i = 2; i <= n; i++)
-        {
-            cout << i << " " << i - 1 << endl;
-        }
-        return;
+        diff[a]++;
+        diff[b + 1]--;
+
+        query.push_back({a, b});
     }
-    if (neg == n)
+
+    freq[1] = diff[1];
+    for (int i = 2; i <= n; i++)
     {
-        cout << n - 1 << endl;
-
-        for (int i = n; i >= 2; i--)
-        {
-            cout << i - 1 << " " << i << endl;
-        }
-        return;
+        freq[i] = freq[i - 1] + diff[i];
     }
-
-    vector<pair<int, int>> ans;
-
-    while (arr[max_i] <= 20)
-    {
-        arr[max_i] += arr[max_i];
-        ans.push_back({max_i, max_i});
-    }
-    // cout << "Max I" << max_i << "max" << arr[max_i] << endl;
 
     for (int i = 1; i <= n; i++)
     {
-        ans.push_back({i, max_i});
-        arr[i] += arr[max_i];
+        freq_pair.push_back({freq[i], i});
     }
-    for (int i = 2; i <= n; i++)
+    sort(freq_pair.rbegin(), freq_pair.rend());
+
+    // for (int i = 0; i < n; i++)
+    // {
+    //     cout << freq_pair[i].first << " " << freq_pair[i].second << endl;
+    //     // cout << freq[i] << " " << i << endl;
+    // }
+
+    for (int i = 0; i < n; i++)
     {
-        arr[i] = arr[i] + arr[i - 1];
-        ans.push_back({i, i - 1});
+        new_arr[freq_pair[i].second - 1] = arr[i];
     }
-    cout << ans.size() << endl;
-    for (auto i : ans)
-    {
-        cout << i.first << " " << i.second << endl;
-    }
-    // for (int i = 1; i <= n; i++)
-    //     cout << arr[i] << " ";
+
+    // for (int i = 0; i < n; i++)
+    // {
+    //     cout << new_arr[i] << " ";
+    // }
     // cout << endl;
+
+    // pre_sum[1] = new_arr[0];
+    for (int i = 1; i <= n; i++)
+    {
+        pre_sum[i] = pre_sum[i - 1] + new_arr[i - 1];
+    }
+    // for (int i = 0; i <= n; i++)
+    // {
+    //     cout << pre_sum[i] << " ";
+    // }
+    // cout << endl;
+
+    ll ans = 0;
+
+    for (int i = 0; i < q; i++)
+    {
+        ans += pre_sum[query[i].second] - pre_sum[query[i].first - 1];
+    }
+    // cout << endl;
+
+    cout << ans << endl;
 }
 
 int main()
@@ -170,10 +169,6 @@ int main()
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     int t;
-    cin >> t;
-    while (t--)
-    {
-        solve();
-    }
+    solve();
     return 0;
 }

@@ -91,78 +91,28 @@ using ll = long long int;
 
 void solve()
 {
-    int pos = 0;
-    int neg = 0;
-
     int n;
     cin >> n;
 
-    int arr[n + 1];
-    int maxi = INT_MIN;
-    int max_i = 0;
+    bool row1 = 1, row2 = 1;
 
-    for (int i = 1; i <= n; i++)
+    string s, t;
+    cin >> s >> t;
+
+    for (int i = 0; i < n; i++)
     {
-        cin >> arr[i];
-
-        pos += arr[i] > 0;
-        neg += arr[i] <= 0;
-
-        if (arr[i] > maxi)
-        {
-            maxi = arr[i];
-            max_i = i;
-        }
+        if (s[i] == 'B' and t[i] == 'B')
+            swap(row1, row2);
+        else if (s[i] == 'W')
+            row1 = 0;
+        else if (t[i] == 'W')
+            row2 = 0;
     }
 
-    if (pos == n)
-    {
-        cout << n - 1 << endl;
-
-        for (int i = 2; i <= n; i++)
-        {
-            cout << i << " " << i - 1 << endl;
-        }
-        return;
-    }
-    if (neg == n)
-    {
-        cout << n - 1 << endl;
-
-        for (int i = n; i >= 2; i--)
-        {
-            cout << i - 1 << " " << i << endl;
-        }
-        return;
-    }
-
-    vector<pair<int, int>> ans;
-
-    while (arr[max_i] <= 20)
-    {
-        arr[max_i] += arr[max_i];
-        ans.push_back({max_i, max_i});
-    }
-    // cout << "Max I" << max_i << "max" << arr[max_i] << endl;
-
-    for (int i = 1; i <= n; i++)
-    {
-        ans.push_back({i, max_i});
-        arr[i] += arr[max_i];
-    }
-    for (int i = 2; i <= n; i++)
-    {
-        arr[i] = arr[i] + arr[i - 1];
-        ans.push_back({i, i - 1});
-    }
-    cout << ans.size() << endl;
-    for (auto i : ans)
-    {
-        cout << i.first << " " << i.second << endl;
-    }
-    // for (int i = 1; i <= n; i++)
-    //     cout << arr[i] << " ";
-    // cout << endl;
+    if (!row1 and !row2)
+        cout << "NO" << endl;
+    else
+        cout << "YES" << endl;
 }
 
 int main()
