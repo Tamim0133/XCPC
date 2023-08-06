@@ -42,7 +42,7 @@ using ull = unsigned long long;
 
 // Constants
 const lld pi = 3.141592653589793238;
-const ll INF = INT64_MAX;
+const ll INF = LONG_MAX;
 const ll mod = 1e9 + 7;
 
 // TypeDEf
@@ -132,7 +132,7 @@ ll sumvec(vector<T> v)
 #define debug(x)       \
     cerr << #x << " "; \
     _print(x);         \
-    cerr << endl;
+    cerr << "\n";
 
 #else
 #define debug(x) ;
@@ -250,45 +250,30 @@ bool sortd(const pair<int, int> &a, const pair<int, int> &b) { return (a.second 
 
 void dusty()
 {
+    string s, t;
+    cin >> s >> t;
 
-    ll a, b, n, maxi = 0, ans = 0;
-    cin >> n;
+    if (sz(s) < sz(t))
+        swap(s, t);
 
-    // vll v(2e5 + 1000, 0);
-    mll map;
-
-    FOR(i, 0, n)
+    if (sz(s) > sz(t) or s != t)
     {
-        cin >> a >> b;
-
-        map[a]++;
-        map[b + 1]--;
-
-        // maxi = max(maxi, max(a, b));
+        cout << sz(s) << endl;
+        return;
     }
-
-    ll sum = 0;
-
-    for (auto i : map)
+    if (s == t)
     {
-        sum += i.second;
-        ans = max(ans, sum);
-        // cout << "sum" << sum << "ans" << ans << endl;
+        cout << -1 << endl;
+        return;
     }
-    cout << ans << endl;
-    debug(map);
+    debug(s);
+    debug(t);
 }
 // Main
 int main()
 {
     Code By dusty_spider
 
-    //     ll t;
-    // cin >> t;
-    // fl(i, t)
-    // {
-    //     dusty();
-    // }
     dusty();
     // fl(i,t) //Kickstart
     // {

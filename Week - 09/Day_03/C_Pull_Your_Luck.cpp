@@ -42,7 +42,7 @@ using ull = unsigned long long;
 
 // Constants
 const lld pi = 3.141592653589793238;
-const ll INF = INT64_MAX;
+const ll INF = LONG_MAX;
 const ll mod = 1e9 + 7;
 
 // TypeDEf
@@ -132,7 +132,7 @@ ll sumvec(vector<T> v)
 #define debug(x)       \
     cerr << #x << " "; \
     _print(x);         \
-    cerr << endl;
+    cerr << "\n";
 
 #else
 #define debug(x) ;
@@ -250,46 +250,64 @@ bool sortd(const pair<int, int> &a, const pair<int, int> &b) { return (a.second 
 
 void dusty()
 {
+    ll n, x, p, p_sum, apadoto_sum;
+    cin >> n >> x >> p;
+    if (p % 2 == 0)
+        p_sum = (p / 2) * ((p + 1));
+    else
+        p_sum = (p / 2) * ((p + 1) / 2);
 
-    ll a, b, n, maxi = 0, ans = 0;
-    cin >> n;
+    ll banani_lagbe = n - x;
 
-    // vll v(2e5 + 1000, 0);
-    mll map;
-
-    FOR(i, 0, n)
+    if (p_sum < banani_lagbe)
     {
-        cin >> a >> b;
-
-        map[a]++;
-        map[b + 1]--;
-
-        // maxi = max(maxi, max(a, b));
+        cout << "No" << endl;
+        return;
     }
 
-    ll sum = 0;
-
-    for (auto i : map)
+    bool found = false;
+    for (int i = 1; i <= 2 * n; i++)
     {
-        sum += i.second;
-        ans = max(ans, sum);
-        // cout << "sum" << sum << "ans" << ans << endl;
+        if (i % 2 == 0)
+            apadoto_sum = (i / 2) * ((i + 1));
+        else
+            apadoto_sum = (i) * ((i + 1) / 2);
+
+        debug(apadoto_sum);
+
+        if (apadoto_sum > banani_lagbe)
+            banani_lagbe += ((apadoto_sum - banani_lagbe + n - 1) / n) * n;
+
+        if (apadoto_sum == banani_lagbe)
+        {
+            // debug(apadoto_sum);
+            // debug(banani_lagbe);
+            found = true;
+            break;
+        }
+        debug(apadoto_sum);
+        debug(banani_lagbe);
     }
-    cout << ans << endl;
-    debug(map);
+
+    if (found)
+        cout << "Yes" << endl;
+    else
+        cout << "No" << endl;
+
+    // debug(n);
 }
 // Main
 int main()
 {
     Code By dusty_spider
 
-    //     ll t;
-    // cin >> t;
-    // fl(i, t)
-    // {
-    //     dusty();
-    // }
-    dusty();
+        ll t;
+    cin >> t;
+    fl(i, t)
+    {
+        dusty();
+    }
+    // dusty();
     // fl(i,t) //Kickstart
     // {
     //     cout<<"Case #"<<i+1<<": ";
