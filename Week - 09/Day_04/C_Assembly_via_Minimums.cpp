@@ -250,38 +250,29 @@ bool sortd(const pair<int, int> &a, const pair<int, int> &b) { return (a.second 
 
 void dusty()
 {
-    ll n, x, p, p_sum, apadoto_sum;
-    cin >> n >> x >> p;
+    ll n, k, temp, pos = 0;
+    cin >> n;
 
-    ll banani_lagbe = (n - x) % n;
+    int time = (n * (n - 1)) / 2;
+    vll v(time), ans;
 
-    bool found = false;
-    for (int i = 1; i <= min(2 * n, p); i++)
+    cin >> v;
+    sort(vr(v));
+
+    ll limit = n - 1;
+
+    FOR(i, 0, n)
     {
-        apadoto_sum = ((i * (i + 1LL)) / 2LL);
-
-        // debug(apadoto_sum);
-
-        // if (apadoto_sum > banani_lagbe)
-        //     banani_lagbe += ((apadoto_sum - banani_lagbe + n - 1) / n) * n;
-        apadoto_sum %= n;
-        if (apadoto_sum == banani_lagbe)
+        ll mini = 1e9;
+        FOR(j, 0, limit)
         {
-            // debug(apadoto_sum);
-            // debug(banani_lagbe);
-            found = true;
-            break;
+            mini = min(v[pos++], mini);
         }
-        // debug(apadoto_sum);
-        // debug(banani_lagbe);
+        limit--;
+        cout << mini << " ";
     }
 
-    if (found)
-        cout << "Yes" << endl;
-    else
-        cout << "No" << endl;
-
-    // debug(n);
+    cout << endl;
 }
 // Main
 int main()

@@ -250,51 +250,49 @@ bool sortd(const pair<int, int> &a, const pair<int, int> &b) { return (a.second 
 
 void dusty()
 {
-    ll n, x, p, p_sum, apadoto_sum;
-    cin >> n >> x >> p;
+    ll n, q, a, b, c;
+    char temp;
 
-    ll banani_lagbe = (n - x) % n;
+    cin >> n >> q;
 
-    bool found = false;
-    for (int i = 1; i <= min(2 * n, p); i++)
+    vll arr(n), diff(n + 1);
+
+    cin >> arr;
+
+    diff[0] = arr[0];
+    FOR(i, 1, n + 1)
+    diff[i] = arr[i] - arr[i - 1];
+
+    while (q--)
     {
-        apadoto_sum = ((i * (i + 1LL)) / 2LL);
+        scanf("%lld %lld%c", &a, &b, &temp);
+        // temp = getchar();
 
-        // debug(apadoto_sum);
+        if (temp == '\n')
+            continue;
 
-        // if (apadoto_sum > banani_lagbe)
-        //     banani_lagbe += ((apadoto_sum - banani_lagbe + n - 1) / n) * n;
-        apadoto_sum %= n;
-        if (apadoto_sum == banani_lagbe)
-        {
-            // debug(apadoto_sum);
-            // debug(banani_lagbe);
-            found = true;
-            break;
-        }
-        // debug(apadoto_sum);
-        // debug(banani_lagbe);
+        cin >> c;
+
+        debug(a);
+        debug(b);
+        debug(c);
     }
 
-    if (found)
-        cout << "Yes" << endl;
-    else
-        cout << "No" << endl;
-
-    // debug(n);
+    debug(diff);
+    debug(n);
 }
 // Main
 int main()
 {
     Code By dusty_spider
 
-        ll t;
-    cin >> t;
-    fl(i, t)
-    {
-        dusty();
-    }
-    // dusty();
+    //     ll t;
+    // cin >> t;
+    // fl(i, t)
+    // {
+    //     dusty();
+    // }
+    dusty();
     // fl(i,t) //Kickstart
     // {
     //     cout<<"Case #"<<i+1<<": ";

@@ -250,37 +250,65 @@ bool sortd(const pair<int, int> &a, const pair<int, int> &b) { return (a.second 
 
 void dusty()
 {
-    ll n, x, p, p_sum, apadoto_sum;
-    cin >> n >> x >> p;
+    string s, t = "";
+    cin >> s;
 
-    ll banani_lagbe = (n - x) % n;
+    int n = s.size();
+    bool ok = false;
+    bool corner = 0;
 
-    bool found = false;
-    for (int i = 1; i <= min(2 * n, p); i++)
+    // if (n == 1)
+    // {
+    //     if (s[0] > '4')
+    //     {
+    //         cout << 10 << endl;
+    //     }
+    //     else
+
+    //     {
+    //         cout << s[0] << endl;
+    //     }n
+    //     return;
+    // }
+
+    for (int i = n - 1; i >= 0; i--)
     {
-        apadoto_sum = ((i * (i + 1LL)) / 2LL);
-
-        // debug(apadoto_sum);
-
-        // if (apadoto_sum > banani_lagbe)
-        //     banani_lagbe += ((apadoto_sum - banani_lagbe + n - 1) / n) * n;
-        apadoto_sum %= n;
-        if (apadoto_sum == banani_lagbe)
+        if (i == 0)
         {
-            // debug(apadoto_sum);
-            // debug(banani_lagbe);
-            found = true;
-            break;
         }
-        // debug(apadoto_sum);
-        // debug(banani_lagbe);
+        else if (s[i] > '4' and s[i - 1] == '4')
+        {
+            s[i - 1] = '5';
+        }
     }
 
-    if (found)
-        cout << "Yes" << endl;
-    else
-        cout << "No" << endl;
+    for (int i = 0; i < n; i++)
+    {
+        if (!ok and s[i] > '4')
+        {
+            s[i] = '0';
+            if (i == 0)
+            {
+                corner = 1;
+            }
+            else
+                s[i - 1] += 1;
 
+            ok = 1;
+            // debug(s);
+        }
+        else if (ok)
+        {
+            s[i] = '0';
+            // debug(s);
+        }
+    }
+    if (corner)
+        cout << 1 << s << endl;
+    else
+        cout << s << endl;
+
+    // debug(s);
     // debug(n);
 }
 // Main

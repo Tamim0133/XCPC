@@ -250,51 +250,48 @@ bool sortd(const pair<int, int> &a, const pair<int, int> &b) { return (a.second 
 
 void dusty()
 {
-    ll n, x, p, p_sum, apadoto_sum;
-    cin >> n >> x >> p;
+    ll n, ans = 0;
+    cin >> n;
 
-    ll banani_lagbe = (n - x) % n;
+    string s;
+    cin >> s;
 
-    bool found = false;
-    for (int i = 1; i <= min(2 * n, p); i++)
+    if (n > 26)
     {
-        apadoto_sum = ((i * (i + 1LL)) / 2LL);
-
-        // debug(apadoto_sum);
-
-        // if (apadoto_sum > banani_lagbe)
-        //     banani_lagbe += ((apadoto_sum - banani_lagbe + n - 1) / n) * n;
-        apadoto_sum %= n;
-        if (apadoto_sum == banani_lagbe)
-        {
-            // debug(apadoto_sum);
-            // debug(banani_lagbe);
-            found = true;
-            break;
-        }
-        // debug(apadoto_sum);
-        // debug(banani_lagbe);
+        cout << -1 << endl;
+        return;
     }
 
-    if (found)
-        cout << "Yes" << endl;
-    else
-        cout << "No" << endl;
+    map<char, int> map;
 
-    // debug(n);
+    FOR(i, 0, n)
+    map[s[i]]++;
+
+    for (auto [i, val] : map)
+    {
+        if (val > 1)
+        {
+            ans += val - 1;
+        }
+    }
+
+    cout << ans << endl;
+
+    debug(map);
+    debug(n);
 }
 // Main
 int main()
 {
     Code By dusty_spider
 
-        ll t;
-    cin >> t;
-    fl(i, t)
-    {
-        dusty();
-    }
-    // dusty();
+    //     ll t;
+    // cin >> t;
+    // fl(i, t)
+    // {
+    //     dusty();
+    // }
+    dusty();
     // fl(i,t) //Kickstart
     // {
     //     cout<<"Case #"<<i+1<<": ";
