@@ -250,38 +250,22 @@ bool sortd(const pair<int, int> &a, const pair<int, int> &b) { return (a.second 
 
 void dusty()
 {
-    ll n, k, same_ele, x;
-    cin >> n >> k;
-`
-    mll map;
+    int a, b, c;
+    cin >> a >> b >> c;
 
-    same_ele = n / k;
-
-    FOR(i, 0, n)
-    {
-        cin >> x;
-        map[x]++;
-        if (map[x] > k)
-            cout << 0 << " ";
-        else
-            cout << map[x] << " ";
-    }
-    cout << endl;
-
-    debug(n);
+    int x = a + b + c;
+    int y = (a + b) * c;
+    int z = a * (b + c);
+    int q = a * b * c;
+    cout << max(x, max(y, max(z, q)));
+    // debug(n);
 }
 // Main
 int main()
 {
     Code By dusty_spider
 
-        ll t;
-    cin >> t;
-    fl(i, t)
-    {
-        dusty();
-    }
-    // dusty();
+    dusty();
     // fl(i,t) //Kickstart
     // {
     //     cout<<"Case #"<<i+1<<": ";
