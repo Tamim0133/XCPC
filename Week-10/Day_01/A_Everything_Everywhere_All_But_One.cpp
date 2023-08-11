@@ -250,49 +250,28 @@ bool sortd(const pair<int, int> &a, const pair<int, int> &b) { return (a.second 
 
 void dusty()
 {
-    ll n, m;
-    cin >> n >> m;
+    ll n;
+    cin >> n;
 
-    string s;
-    cin >> s;
-
-    vll nz(n), no(n);
-
-    ll nzero = -1, none = n + 1;
+    vll arr(n);
+    cin >> arr;
 
     FOR(i, 0, n)
     {
-        if (s[i] == '0')
-
-            nzero = i;
-        nz[i] = nzero;
+        int sum = 0;
+        FOR(j, 0, n)
+        {
+            if (i != j)
+            {
+                sum = sum + arr[j];
+            }
+        }
+        if ((float)((float)sum / (float)(n - 1)) == arr[i])
+        {
+            py return;
+        }
     }
-    for (int i = n - 1; i >= 0; i--)
-    {
-        if (s[i] == '1')
-
-            none = i;
-        no[i] = none;
-    }
-
-    set<pair<int, int>> set;
-
-    int mainstr = 0;
-
-    FOR(i, 0, m)
-    {
-        int a, b;
-        cin >> a >> b;
-
-        if (no[a - 1] > nz[b - 1])
-            mainstr = 1;
-        else
-            set.insert(make_pair(no[a - 1], nz[b - 1]));
-    }
-
-    cout << set.size() + mainstr << endl;
-
-    debug(n);
+    pn
 }
 // Main
 int main()

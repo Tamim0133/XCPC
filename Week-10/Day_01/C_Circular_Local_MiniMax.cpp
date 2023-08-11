@@ -250,49 +250,52 @@ bool sortd(const pair<int, int> &a, const pair<int, int> &b) { return (a.second 
 
 void dusty()
 {
-    ll n, m;
-    cin >> n >> m;
+    ll n;
+    cin >> n;
 
-    string s;
-    cin >> s;
+    vll arr(n), ans(n);
+    cin >> arr;
 
-    vll nz(n), no(n);
+    sort(vr(arr));
 
-    ll nzero = -1, none = n + 1;
-
-    FOR(i, 0, n)
+    FOR(i, 0, (n + 1) / 2)
     {
-        if (s[i] == '0')
-
-            nzero = i;
-        nz[i] = nzero;
+        ans[i * 2] = arr[i];
     }
-    for (int i = n - 1; i >= 0; i--)
+    for (int i = (n + 1) / 2, j = 1; i < n; i++, j += 2)
     {
-        if (s[i] == '1')
-
-            none = i;
-        no[i] = none;
+        ans[j] = arr[i];
     }
 
-    set<pair<int, int>> set;
+    bool check = 1;
 
-    int mainstr = 0;
-
-    FOR(i, 0, m)
+    for (int i = 1; i < n - 1; i++)
     {
-        int a, b;
-        cin >> a >> b;
-
-        if (no[a - 1] > nz[b - 1])
-            mainstr = 1;
+        if ((ans[i] > ans[i - 1] and ans[i] > ans[i + 1]) or (ans[i] < ans[i - 1] and ans[i] < ans[i + 1]))
+        {
+        }
         else
-            set.insert(make_pair(no[a - 1], nz[b - 1]));
+        {
+            check = 0;
+        }
+    }
+    if ((ans[n - 1] > ans[n - 1 - 1] and ans[n - 1] > ans[0]) or (ans[n - 1] < ans[n - 1 - 1] and ans[n - 1] < ans[0]))
+    {
+    }
+    else
+    {
+        check = 0;
     }
 
-    cout << set.size() + mainstr << endl;
-
-    debug(n);
+    if (check)
+    {
+        py
+                cout
+            << ans << endl;
+    }
+    else
+        pn
+            debug(arr);
 }
 // Main
 int main()

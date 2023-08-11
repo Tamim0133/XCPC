@@ -250,49 +250,50 @@ bool sortd(const pair<int, int> &a, const pair<int, int> &b) { return (a.second 
 
 void dusty()
 {
-    ll n, m;
-    cin >> n >> m;
+    int a, b, c, d;
+    cin >> a >> b >> c >> d;
 
     string s;
     cin >> s;
-
-    vll nz(n), no(n);
-
-    ll nzero = -1, none = n + 1;
-
-    FOR(i, 0, n)
+    if (s.size() != (a + b + c * 2 + d * 2))
     {
-        if (s[i] == '0')
-
-            nzero = i;
-        nz[i] = nzero;
+        pn return;
     }
-    for (int i = n - 1; i >= 0; i--)
+    int n = s.size();
+    int BA = 0, AB = 0, B = 0, A = 0;
+
+    FOR(i, 0, n - 1)
     {
-        if (s[i] == '1')
-
-            none = i;
-        no[i] = none;
+        if (s[i] == 'B' and s[i + 1] == 'A')
+        {
+            BA++;
+            i++;
+        }
     }
-
-    set<pair<int, int>> set;
-
-    int mainstr = 0;
-
-    FOR(i, 0, m)
+    FOR(i, 0, n - 1)
     {
-        int a, b;
-        cin >> a >> b;
-
-        if (no[a - 1] > nz[b - 1])
-            mainstr = 1;
-        else
-            set.insert(make_pair(no[a - 1], nz[b - 1]));
+        if (s[i] == 'A' and s[i + 1] == 'B')
+        {
+            AB++;
+            i++;
+        }
     }
-
-    cout << set.size() + mainstr << endl;
-
-    debug(n);
+    FOR(i, 0, n - 1)
+    {
+        if (s[i] == 'B')
+        {
+            B++;
+        }
+    }
+    FOR(i, 0, n - 1)
+    {
+        if (s[i] == 'A')
+        {
+            A++;
+        }
+    }
+    if (a <= A and b <= B and c <= AB and d <= BA)
+        py else pn
 }
 // Main
 int main()
