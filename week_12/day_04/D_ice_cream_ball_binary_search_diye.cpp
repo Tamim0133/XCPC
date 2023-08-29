@@ -247,19 +247,25 @@ bool sortd(const pair<int, int> &a, const pair<int, int> &b) { return (a.second 
 /*---------------------------------------------------------------------------
                              Dusty_Spider
 ---------------------------------------------------------------------------*/
-ll binary_search(ll n)
+
+void dusty()
 {
-    ll low = 2, high = 2648956421, mid, ans = 1;
-    while (low <= high)
+    ll n;
+    cin >> n;
+
+    ll low = 2, high = 2648956421, ans, mid, k;
+
+    while (low <= high) // যদি ans high তে লাই করে তখন মিড হাই তে আসবি না ।
     {
-        mid = (low + high) / 2;
-        ll k = mid * (mid - 1) / 2;
+        mid = low + (high - low) / 2;
+        k = mid * (mid - 1) / 2;
 
         if (k == n)
         {
-            return mid;
+            cout << mid << endl;
+            return;
         }
-        if (k < n)
+        else if (k < n)
         {
             ans = mid;
             low = mid + 1;
@@ -269,20 +275,8 @@ ll binary_search(ll n)
             high = mid - 1;
         }
     }
-    return ans;
-}
-void dusty()
-{
-    ll n;
-    cin >> n;
-
-    ll ans = binary_search(n);
-
-    ll c = ans * (ans - 1) / 2;
-
-    c = n - c;
-    ans += c;
-    cout << ans << endl;
+    k = ans * (ans - 1) / 2; // এই খানে k আপডেট করা লাগবে ।
+    cout << n - k + ans << endl;
 }
 // Main
 int main()

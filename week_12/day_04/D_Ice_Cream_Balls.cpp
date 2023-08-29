@@ -247,42 +247,24 @@ bool sortd(const pair<int, int> &a, const pair<int, int> &b) { return (a.second 
 /*---------------------------------------------------------------------------
                              Dusty_Spider
 ---------------------------------------------------------------------------*/
-ll binary_search(ll n)
-{
-    ll low = 2, high = 2648956421, mid, ans = 1;
-    while (low <= high)
-    {
-        mid = (low + high) / 2;
-        ll k = mid * (mid - 1) / 2;
 
-        if (k == n)
-        {
-            return mid;
-        }
-        if (k < n)
-        {
-            ans = mid;
-            low = mid + 1;
-        }
-        else
-        {
-            high = mid - 1;
-        }
-    }
-    return ans;
-}
 void dusty()
 {
     ll n;
     cin >> n;
+    ll x = (1 + sqrtl(1 + 8 * n)) / 2;
+    ll k = x * (x - 1) / 2;
 
-    ll ans = binary_search(n);
+    cout << n - k + x << endl;
 
-    ll c = ans * (ans - 1) / 2;
-
-    c = n - c;
-    ans += c;
-    cout << ans << endl;
+    // ধরি বল x টা ।
+    // কালার করতে হবে n টা ।
+    // তাহলে xC2 করে n পাওয়া যাবে ।
+    // xC2  = x*(x-১) / ২;
+    // x*(x-১) / ২ = n
+    // এই ইকুয়েশন সলভ করলে পাই x = (১ + sqrt(১+৮*n))/২;
+    // এখানে মাইনাস নেইনি । তাহলে x এর ভ্যালু নেগেটিভ আস্ত ।
+    // এই x এর ম্যান বুঝায় কতগুলা ডিফারেন্ট নেব । রিপিট বের করার জন্য যতগুলা টোটাল বানাতে হবে বিয়োগ ডিফারেন্ট গুয়াল দিয়ে যতগুলা বানানো যায় , এড  হবে ।
 }
 // Main
 int main()
