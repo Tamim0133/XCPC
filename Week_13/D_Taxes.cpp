@@ -1,29 +1,4 @@
-
-#include <iostream>
-#include <algorithm>
-#include <array>
-#include <bitset>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <cstdint>
-#include <complex>
-#include <cmath>
-#include <chrono>
-#include <ctime>
-#include <cassert>
-#include <list>
-#include <vector>
-#include <set>
-#include <map>
-#include <stack>
-#include <unordered_map>
-#include <unordered_set>
-#include <queue>
-#include <string>
-#include <random>
-
-#pragma GCC target("popcnt")
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -247,73 +222,59 @@ bool sortd(const pair<int, int> &a, const pair<int, int> &b) { return (a.second 
 /*---------------------------------------------------------------------------
                              Dusty_Spider
 ---------------------------------------------------------------------------*/
+// A optimized school method based C++ program to check
+// if a number is prime
 
+bool isPrime(ll n)
+{
+    if (n <= 1)
+        return false;
+    if (n <= 3)
+        return true;
+
+    if (n % 2 == 0 || n % 3 == 0)
+        return false;
+
+    for (int i = 5; i * i <= n; i = i + 6)
+        if (n % i == 0 || n % (i + 2) == 0)
+            return false;
+
+    return true;
+}
+/*
+    21 -> 1, 13 , 7 ; 1 and two primes (3)
+    21 -> 2 , 19 ; 2 primes (2)
+*/
 void dusty()
 {
-    ll n, k;
-    cin >> n >> k;
+    ll n;
+    cin >> n;
 
-    vll arr(n), temp(n), temp_a(n + 1, 0), first_op;
-   
-    debug(temp);
-    cin >> arr;
-    // tem = arr;
-
-    ll start = -1;
-
-    // sort(vr(arr));
-
-    for (int i = 0; i < n; i++)
+    if (isPrime(n))
     {
-        temp_a[arr[i]]++;
+        cout << 1 << endl;
     }
-    for (int i = 0; i <= n; i++)
+    else if (n % 2 == 0 or isPrime(n - 2))
     {
-        if (temp_a[i] == 0)
-        {
-            start = i;
-            break;
-        }
+        cout << 2 << endl;
     }
-    first_op.pb(start);
-    // for (int j = 1; j <= k; j++)
+    else
     {
-        for (int i = 0; i < n; i++)
-        {
-            int temp = arr[i];
-            arr[i] = start;
-            start = temp;
-        }
-        // cout << "j  " << j << " :  " << arr << endl;
+        cout << 3 << endl;
     }
-    arr.resize(n + 1);
-    arr[n] = start;
-    debug(arr);
-    // ll remaininng_op = (k - 1) % n;
-    // // ll pos = remaininng_op - 1;
-    // int p = start;
-    // start = start - remaininng_op;
-    // if (start == -1)
-    //     cout << arr << endl;
-    // else
-
-    //     debug(arr);
-    // debug(remaininng_op);
-    // // debug(pos);
-    // debug(start);
 }
 // Main
 int main()
 {
     Code By dusty_spider
 
-        ll t;
-    cin >> t;
-    fl(i, t)
-    {
-        dusty();
-    }
-    // dusty();
+    //     ll t;
+    // cin >> t;
+    // fl(i, t)
+    // {
+    //     dusty();
+    // }
+    dusty();
     // fl(i,t) //Kickstart
     // {
     //     cout<<"Case #"<<i+1<<": ";

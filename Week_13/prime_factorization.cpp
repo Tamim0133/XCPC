@@ -250,69 +250,33 @@ bool sortd(const pair<int, int> &a, const pair<int, int> &b) { return (a.second 
 
 void dusty()
 {
-    ll n, k;
-    cin >> n >> k;
+    ll n;
+    cin >> n;
 
-    vll arr(n), temp(n), temp_a(n + 1, 0), first_op;
-   
-    debug(temp);
-    cin >> arr;
-    // tem = arr;
-
-    ll start = -1;
-
-    // sort(vr(arr));
-
-    for (int i = 0; i < n; i++)
-    {
-        temp_a[arr[i]]++;
-    }
-    for (int i = 0; i <= n; i++)
-    {
-        if (temp_a[i] == 0)
-        {
-            start = i;
-            break;
-        }
-    }
-    first_op.pb(start);
-    // for (int j = 1; j <= k; j++)
-    {
-        for (int i = 0; i < n; i++)
-        {
-            int temp = arr[i];
-            arr[i] = start;
-            start = temp;
-        }
-        // cout << "j  " << j << " :  " << arr << endl;
-    }
-    arr.resize(n + 1);
-    arr[n] = start;
-    debug(arr);
-    // ll remaininng_op = (k - 1) % n;
-    // // ll pos = remaininng_op - 1;
-    // int p = start;
-    // start = start - remaininng_op;
-    // if (start == -1)
-    //     cout << arr << endl;
-    // else
-
-    //     debug(arr);
-    // debug(remaininng_op);
-    // // debug(pos);
-    // debug(start);
+    debug(n);
 }
 // Main
 int main()
 {
     Code By dusty_spider
 
-        ll t;
-    cin >> t;
-    fl(i, t)
+        int n;
+    cin >> n;
+    vector<int> prime_factors;
+    for (int i = 2; i * i <= n; i++)
     {
-        dusty();
+        while (n % i == 0)
+        {
+            prime_factors.pb(i);
+            n = n / i;
+        }
     }
+    if (n > 1)
+        prime_factors.pb(n);
+
+    for (auto i : prime_factors)
+        cout << i << " ";
+    cout << endl;
     // dusty();
     // fl(i,t) //Kickstart
     // {
