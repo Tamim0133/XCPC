@@ -1,0 +1,21 @@
+FOP topics : 
+
+Practice : 
+* anagram (Done)
+* cipher  (Done)
+* big integer
+* pattern
+* linear equation solve
+* string in c , substring , copy
+* recursion
+* structure
+
+Theory : 
+* Function block , call stack 
+* array operation and array memory allocation and kadanes algo
+* multi d array and their memory allocation 
+* sorting
+
+
+
+
