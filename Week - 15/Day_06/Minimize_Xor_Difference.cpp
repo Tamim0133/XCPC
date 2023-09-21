@@ -250,89 +250,85 @@ bool sortd(const pair<int, int> &a, const pair<int, int> &b) { return (a.second 
 
 void dusty()
 {
-    ll n;
-    cin >> n;
+    ll A, B;
+    cin >> A >> B;
 
-    string s;
-    cin >> s;
+    bool zero_one = false;
+    bool one_zero = false;
 
-    int odd = 1;
+    // ll x = 2147483647;
 
-    if (n % 2 == 0)
-        odd = 0;
+    // ll y = A & x;
+    // ll z = B & x;
 
-    int mistakes = 0;
-    for (int i = 0; i < (n + 1) / 2; i++)
+    // ll ans = y | z;
+
+    // if (A == 0 or B == 0)
+    //     ans /= 2;
+    // cout << ans << endl;
+    // cout << "ans :" << abs((ans ^ A) - (ans ^ B)) << endl;
+    int k = 0, ans = 0;
+    ll a = A;
+    ll b = B;
+    ll ta = 0;
+    ll tb = 0;
+    while (A || B)
     {
-        if (s[i] != s[n - i - 1])
+        if (A % 2 == 0 and B % 2 == 1)
         {
-            mistakes++;
+            ans += pow(2, k);
         }
-    }
-    // mistakes *= 2
-
-    // if (mistakes == 0)
-    // {
-    //     if (odd)
-    //     {
-    //         for (int i = 0; i <= n; i++)
-    //         {
-    //             cout << 1;
-    //         }
-    //         cout << endl;
-    //         return;
-    //     }
-    //     else
-    //     {
-    //         for (int i = 0; i < n / 2; i++)
-    //         {
-    //             cout << "10";
-    //         }
-    //         cout << "1" << endl;
-    //         return;
-    //     }
-    // }
-
-    vll ans(n + 1, 0);
-
-    string t = s;
-
-    reverse(s.begin(), s.end());
-
-    // if (s == t)
-    // {
-    //     ans[0] = 1;
-    //     ans[n] = 1;
-    // }
-    // else
-    // {
-    // }
-    if (odd)
-    {
-        for (int i = 0; i <= (n + 1) / 2; i++)
+        else if ((A % 2 == 0 and B % 2 == 1) or (A % 2 == 1 and B % 2 == 0))
         {
-            if (i - mistakes >= 0)
+            if (zero_one)
             {
-                ans[i] = 1;
-                ans[n - i] = 1;
+                ans += pow(2, k);
+                zero_one = false;
+            }
+            else
+            {
+                zero_one = true;
             }
         }
-    }
-    else
-    {
-        for (int i = 0; i <= (n + 1) / 2; i++)
+        // else if (A % 2 == 0 and B % 2 == 1)
+        // {
+        //     if (zero_one)
+        //     {
+        //         ans += pow(2, k);
+        //         zero_one = false;
+        //     }
+        //     else
+        //     {
+        //         zero_one = true;
+        //     }
+        // }
+        // else if (A % 2 == 1 and B % 2 == 0)
+        // {
+        //     if (one_zero)
+        //     {
+        //         ans += pow(2, k);
+        //         one_zero = false;
+        //     }
+        //     else
+        //     {
+        //         one_zero = true;
+        //     }
+        // }
+        // else if (A == 1 and B == 0 or B == 1 and A == 0)
+        // {
+        //     ans += pow(2, k);
+        // }
+        else
         {
-            if ((i - mistakes) >= 0 and (i - mistakes) % 2 == 0)
-            {
-                ans[i] = 1;
-                ans[n - i] = 1;
-            }
         }
+        A /= 2;
+        B /= 2;
+        k++;
     }
+    cout << ans << endl;
+    cout << "ans :" << abs((ans ^ a) - (ans ^ b)) << endl;
 
-    for (auto i : ans)
-        cout << i;
-    cout << endl;
+    // debug(n);
 }
 // Main
 int main()
